@@ -1,0 +1,121 @@
+<?xml version = "1.0"?>
+<robot name = "hopping_leg">
+    <material name = "blue">
+        <color rgba = "0 0 0.8 1"/>
+    </material> 
+
+    <material name = "black">
+        <color rgba = "0 0 0 1"/>
+    </material>
+
+    <material name = "white">
+        <color rgba = "1 1 1 1"/>
+    </material>
+
+    <link name = "plate">
+        <visual>
+            <geometry>
+                <box size = "2 2 0.5"/>
+            </geometry>
+            <origin rpy = "0 0 0" xyz = "0 0 0.25"/>
+            <material name = "blue"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <box size = "2 2 0.5"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name = "base_frame" type = "fixed">
+        <parent link = "plate"/>
+        <child link = "parent"/>
+        <origin xyz = "0 0 0"/>
+    </joint>
+
+    <link name = "parent">
+        <visual>
+            <geometry>
+                <cylinder length = "0.25" radius = "1"/>
+            </geometry>
+            <origin rpy = "0 0 0" xyz = "0 0 0.625"/>
+            <material name = "white"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <cylinder length = "0.5" radius = "1"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name = "p2c" type = "continuous">
+        <parent link = "parent"/>
+        <child link = "child1"/>
+        <origin rpy = "0 0 0" xyz = "0 0 1.75"/>
+        <axis xyz = "0 0 1"/>
+    </joint>
+
+    <link name = "child1">
+        <visual>
+            <geometry>
+                <box size = "2 2 2"/>
+            </geometry>
+            <origin rpy = "0 0 0" xyz = "0 0 0"/>
+            <material name = "black"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <box size = "2 2 2"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name = "child1_to_child1_1" type = "fixed">
+        <parent link = "child1"/>
+        <child link = "child1_1"/>
+        <origin rpy = "0 1.57 0" xyz = "1 0 0"/>
+        <material name = "white"/>
+    </joint>
+
+    <link name = "child1_1">
+        <visual>
+            <geometry>
+                <cylinder length = "0.5" radius = "1"/>
+            </geometry>
+            <origin rpy = "0 0 0" xyz = "0 0 0"/>
+            <material name = "white"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <cylinder length = "0.25" radius = "1"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name = "child1_1_to_child2" type = "continuous">
+        <parent link = "child1_1"/>
+        <child link = "child2"/>
+        <origin rpy = "0 1.57 0" xyz = "0 0 1.25"/>
+        <material name = "white"/>
+    </joint>
+
+    <link name = "child2">
+        <visual>
+            <geometry>
+                <box size = "2 2 2"/>
+            </geometry>
+            <origin rpy = "0 0 0" xyz = "0 0 0"/>
+            <material name = "blue"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <box size = "2 2 2"/>
+            </geometry>
+        </collision>
+    </link>
+</robot>
